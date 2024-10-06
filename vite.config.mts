@@ -45,6 +45,7 @@ let viteConfig = {
     plugins: [
         vue(),
         dts({
+            insertTypesEntry: true,
             afterBuild: () => {
                 setTimeout(removeUnnecessary, 50);
             },
