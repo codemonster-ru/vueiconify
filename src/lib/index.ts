@@ -21,3 +21,5 @@ export { default as CmChevronLeftIcon } from '@/lib/components/chevronLeft.vue';
 
 export * from '@/lib/components/chevronRight.vue';
 export { default as CmChevronRightIcon } from '@/lib/components/chevronRight.vue';
+
+export { default as CmIcon } from '@/lib/components/icon.vue';

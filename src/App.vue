@@ -1,16 +1,17 @@
 <template>
-    <cm-sun-icon />
-    <cm-bars-icon />
-    <cm-moon-icon />
-    <cm-circle-half />
-    <cm-chevron-up-icon />
-    <cm-chevron-down-icon />
-    <cm-chevron-left-icon />
-    <cm-chevron-right-icon />
+    <cm-icon :icon="CmSunIcon" />
+    <cm-icon :icon="CmBarsIcon" />
+    <cm-icon :icon="CmMoonIcon" />
+    <cm-icon :icon="CmCircleHalf" />
+    <cm-icon :icon="CmChevronUpIcon" />
+    <cm-icon :icon="CmChevronDownIcon" />
+    <cm-icon :icon="CmChevronLeftIcon" />
+    <cm-icon :icon="CmChevronRightIcon" />
 </template>
 
 <script setup lang="ts">
 import {
+    CmIcon,
     CmSunIcon,
     CmBarsIcon,
     CmMoonIcon,
