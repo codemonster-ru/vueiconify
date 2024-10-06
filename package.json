@@ -1,9 +1,9 @@
 {
-    "name": "@codemonster/vue-icons",
-    "version": "0.0.1",
+    "name": "@codemonster/icons",
+    "version": "0.1.0",
     "description": "Open source icon library.",
     "keywords": [],
-    "homepage": "https://codemonster.ru",
+    "homepage": "https://icons.codemonster.ru",
     "repository": {
         "type": "git",
         "url": "https://github.com/codemonster-ru/icons.git"
