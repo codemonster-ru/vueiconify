@@ -1,6 +1,6 @@
 # Codemonster Icons
 
-Open source icon library.
+Open source vue icon library.
 
 ## License
 
