@@ -1,6 +1,6 @@
 {
     "name": "@codemonster-ru/icons",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Open source vue icon library.",
     "keywords": [],
     "homepage": "https://icons.codemonster.ru",
@@ -12,15 +12,15 @@
     "license": "MIT",
     "main": "./dist/index.ts.umd.js",
     "module": "./dist/index.ts.mjs",
-    "types": "./dist/index.d.ts",
+    "types": "./dist/lib/index.d.ts",
     "exports": {
         ".": {
             "import": {
-                "types": "./dist/index.d.mts",
+                "types": "./dist/lib/index.d.ts",
                 "default": "./dist/index.ts.mjs"
             },
             "require": {
-                "types": "./dist/index.d.ts",
+                "types": "./dist/lib/index.d.ts",
                 "default": "./dist/index.ts.umd.js"
             }
         }
