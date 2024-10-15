@@ -1,16 +1,17 @@
 <template>
-    <component :is="props.icon" />
+    <component :is="loadIcon" />
 </template>
 
 <script setup lang="ts">
-import { CmMoonIcon } from '@/lib';
-import type { Component } from 'vue';
+import icons from '@/lib/icons.json';
+import { computed, defineAsyncComponent } from 'vue';
 
-interface Props {
-    icon: Component;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-    icon: CmMoonIcon,
+const props = defineProps({
+    icon: {
+        type: String,
+        default: 'moon',
+        validator: (value: string) => icons.list.indexOf(value) > -1,
+    },
 });
+const loadIcon = computed(() => defineAsyncComponent(() => import('..' + `/components/${props.icon}.vue`)));
 </script>

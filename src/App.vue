@@ -1,24 +1,14 @@
 <template>
-    <cm-icon :icon="CmSunIcon" />
-    <cm-icon :icon="CmBarsIcon" />
-    <cm-icon :icon="CmMoonIcon" />
-    <cm-icon :icon="CmCircleHalf" />
-    <cm-icon :icon="CmChevronUpIcon" />
-    <cm-icon :icon="CmChevronDownIcon" />
-    <cm-icon :icon="CmChevronLeftIcon" />
-    <cm-icon :icon="CmChevronRightIcon" />
+    <cm-icon icon="sun" />
+    <cm-icon icon="bars" />
+    <cm-icon icon="moon" />
+    <cm-icon icon="circleHalf" />
+    <cm-icon icon="chevronUp" />
+    <cm-icon icon="chevronDown" />
+    <cm-icon icon="chevronLeft" />
+    <cm-icon icon="chevronRight" />
 </template>
 
 <script setup lang="ts">
-import {
-    CmIcon,
-    CmSunIcon,
-    CmBarsIcon,
-    CmMoonIcon,
-    CmCircleHalf,
-    CmChevronUpIcon,
-    CmChevronDownIcon,
-    CmChevronLeftIcon,
-    CmChevronRightIcon,
-} from '@/lib';
+import { CmIcon } from '@/lib';
 </script>
