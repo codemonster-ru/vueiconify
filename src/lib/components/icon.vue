@@ -13,5 +13,9 @@ const props = defineProps({
         validator: (value: string) => icons.list.indexOf(value) > -1,
     },
 });
-const loadIcon = computed(() => defineAsyncComponent(() => import('..' + `/components/${props.icon}.vue`)));
+const loadIcon = computed(() => {
+    const icon = props.icon;
+
+    return defineAsyncComponent(() => import('..' + `/components/${icon}.vue`));
+});
 </script>
