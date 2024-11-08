@@ -1,12 +1,18 @@
 {
     "list": [
         "bars",
+        "check",
         "chevronDown",
         "chevronLeft",
         "chevronRight",
         "chevronUp",
         "circleHalf",
+        "circleNotch",
+        "house",
+        "magnifyingGlass",
         "moon",
-        "sun"
+        "rotateRight",
+        "sun",
+        "user"
     ]
 }
