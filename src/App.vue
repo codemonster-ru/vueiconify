@@ -12,7 +12,7 @@
     <cm-icon icon="chevronLeft" />
     <cm-icon icon="chevronRight" />
     <cm-icon icon="magnifyingGlass" />
-    <cm-icon icon="circleNotch" />
+    <cm-icon icon="circleNotch" spin />
 </template>
 
 <script setup lang="ts">
