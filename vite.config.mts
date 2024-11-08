@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'url';
 import { rmSync, existsSync, unlinkSync } from 'node:fs';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 const config = {
     dev: {
@@ -44,6 +45,7 @@ let viteConfig = {
     },
     plugins: [
         vue(),
+        libInjectCss(),
         dts({
             insertTypesEntry: true,
             afterBuild: () => {

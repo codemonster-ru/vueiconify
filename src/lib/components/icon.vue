@@ -33,7 +33,7 @@ const getClasses = computed(() => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .cm-icon_animations_spin {
     animation-name: cm-spin;
     animation-delay: 0s;
