@@ -37,4 +37,7 @@ export { default as CmChevronRightIcon } from '@/lib/components/chevronRight.vue
 export * from '@/lib/components/magnifyingGlass.vue';
 export { default as CmMagnifyingGlass } from '@/lib/components/magnifyingGlass.vue';
 
+export * from '@/lib/components/circleNotch.vue';
+export { default as CmCircleNotch } from '@/lib/components/circleNotch.vue';
+
 export { default as CmIcon } from '@/lib/components/icon.vue';
