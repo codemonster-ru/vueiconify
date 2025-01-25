@@ -29,10 +29,8 @@
         "dist"
     ],
     "scripts": {
-        "dev": "set LIB_NAME=dev&& vite",
-        "dev:link": "npm link",
-        "build": "set LIB_NAME=index&& vite build",
-        "build:docs": "set LIB_NAME=docs&& vite build"
+        "dev": "vite dev --force --mode development",
+        "build": "vite build --mode production"
     },
     "peerDependencies": {
         "vue": "^3.0.0"

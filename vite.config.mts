@@ -5,67 +5,53 @@ import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'url';
 import { rmSync, existsSync, unlinkSync } from 'node:fs';
 import { libInjectCss } from 'vite-plugin-lib-inject-css';
+import path from 'path';
+import fs from 'fs';
 
-const config = {
-    dev: {
-        name: 'dev',
-        entry: resolve(__dirname, './src/main.ts'),
-        fileName: 'main.ts',
-    },
-    docs: {
-        name: 'docs',
-        entry: resolve(__dirname, './src/main.ts'),
-        fileName: 'main.ts',
-    },
-    index: {
-        name: 'index',
-        entry: resolve(__dirname, './src/lib/index.ts'),
-        fileName: 'index.ts',
-        formats: ['es', 'umd'],
-    },
-};
+let entry: string = './src/lib/index.ts';
 
-const currentConfig = config[process.env.LIB_NAME];
-
-if (currentConfig === undefined) {
-    throw new Error('LIB_NAME is not defined or is not valid');
+if (process.env.NODE_ENV === 'development') {
+    entry = './src/main.ts';
 }
 
-const removeUnnecessary = () => {
-    if (process.env.LIB_NAME === 'docs') {
-        if (existsSync('dist/lib')) rmSync('dist/lib', { recursive: true, force: true });
-    } else {
-        if (existsSync('dist/main.d.ts')) unlinkSync('dist/main.d.ts');
-    }
+const removeUnnecessaryFiles = () => {
+    return {
+        name: 'remove-files',
+        writeBundle(outputOptions, inputOptions) {
+            const outDir = outputOptions.dir;
+
+            ['main.d.ts', 'App.vue.d.ts'].map((file) => {
+                const filePath = path.resolve(outDir, file);
+
+                fs.rm(filePath, () => console.log(`Deleted ${filePath}`));
+            });
+        },
+    };
 };
 
-let viteConfig = {
+export default defineConfig({
     define: {
         '__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
     },
     plugins: [
         vue(),
+        dts(),
         libInjectCss(),
-        dts({
-            insertTypesEntry: true,
-            afterBuild: () => {
-                setTimeout(removeUnnecessary, 50);
-            },
-        }),
+        removeUnnecessaryFiles(),
     ],
     resolve: {
         alias: [
             { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
         ],
     },
-};
-
-if (process.env.LIB_NAME !== 'docs') {
-    viteConfig.build = {
-        emptyOutDir: process.env.LIB_NAME === 'docs' || process.env.LIB_NAME === 'index',
+    build: {
+        emptyOutDir: true,
         cssCodeSplit: true,
         lib: {
-            ...currentConfig,
+            name: 'index',
+            entry: resolve(__dirname, entry),
+            fileName: 'index.ts',
+            formats: ['es', 'umd'],
         },
         rollupOptions: {
             external: ['vue'],
@@ -75,8 +61,5 @@ if (process.env.LIB_NAME !== 'docs') {
                 },
             },
         },
-    };
-}
-
-// https://vitejs.dev/config/
-export default defineConfig(viteConfig);
+    },
+});
