@@ -1,12 +1,12 @@
 {
-    "name": "@codemonster-ru/monstericons",
+    "name": "@codemonster-ru/vueiconify",
     "version": "0.7.0",
     "description": "Open source vue icon library.",
     "keywords": [],
-    "homepage": "https://icons.codemonster.ru",
+    "homepage": "https://vueiconify.com/",
     "repository": {
         "type": "git",
-        "url": "https://github.com/codemonster-ru/monstericons.git"
+        "url": "https://github.com/codemonster-ru/vueiconify.git"
     },
     "author": "Kirill Kolesnikov",
     "license": "MIT",

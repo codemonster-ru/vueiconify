@@ -1,4 +1,4 @@
-# MonsterIcons
+# VueIconify
 
 Open source vue icon library.
 
