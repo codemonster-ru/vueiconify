@@ -1,5 +1,9 @@
 # VueIconify
 
+[![npm version](https://img.shields.io/npm/v/%40codemonster-ru%2Fvueiconify?logo=npm)](https://www.npmjs.com/package/@codemonster-ru/vueiconify)
+[![npm downloads/week](https://img.shields.io/npm/dw/%40codemonster-ru%2Fvueiconify?logo=npm)](https://www.npmjs.com/package/@codemonster-ru/vueiconify)
+[![License](https://img.shields.io/npm/l/%40codemonster-ru%2Fvueiconify)](./LICENSE.md)
+
 Lightweight Vue 3 icon library with a single generic `VueIconify` wrapper.
 
 The current direction is `solid`-first: new icons are created and refined as `solid`, while the small existing `regular` layer is kept as an experimental secondary style.

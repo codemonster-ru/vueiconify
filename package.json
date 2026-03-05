@@ -2,11 +2,21 @@
     "name": "@codemonster-ru/vueiconify",
     "version": "1.0.0",
     "description": "Open source vue icon library.",
-    "keywords": [],
+    "keywords": [
+        "vue",
+        "vue3",
+        "icons",
+        "icon-library",
+        "svg-icons",
+        "design-system"
+    ],
     "homepage": "https://vueiconify.com/",
     "repository": {
         "type": "git",
         "url": "https://github.com/codemonster-ru/vueiconify.git"
+    },
+    "bugs": {
+        "url": "https://github.com/codemonster-ru/vueiconify/issues"
     },
     "author": "Kirill Kolesnikov",
     "license": "MIT",
@@ -28,6 +38,9 @@
     "files": [
         "dist"
     ],
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "dev": "vite dev --force --mode development",
         "create-icon": "node ./scripts/create-icon.mjs",
