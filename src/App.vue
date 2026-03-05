@@ -64,8 +64,7 @@
                     <h2>{{ showcaseIconEntries.length }} icons currently visible</h2>
                 </div>
                 <p class="section-heading__text">
-                    The full pack is hidden for now. Showcase only includes icons that are already accepted or actively
-                    being redrawn, so visual review stays focused.
+                    The full pack is hidden for now. Showcase highlights the currently visible icon set.
                 </p>
             </div>
 
@@ -76,7 +75,6 @@
                     class="catalog-group catalog-group_tile"
                 >
                     <div class="catalog-group__header">
-                        <p class="eyebrow">{{ entry.status === 'approved' ? 'Approved' : 'In Progress' }}</p>
                         <h3>{{ getDisplayIconName(entry.icon) }}</h3>
                     </div>
 
