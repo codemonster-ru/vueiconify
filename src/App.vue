@@ -86,7 +86,7 @@
                         @click="copySnippet(getIconSnippet(entry.icon), entry.icon)"
                     >
                         <span class="icon-card__preview">
-                            <VueIconify :icon="getIconToken(entry.icon)" :size="38" />
+                            <VueIconify :icon="getIconToken(entry.icon)" :size="44" />
                         </span>
                         <span class="icon-card__meta">{{ copyLabel(entry.icon) }}</span>
                     </button>
@@ -464,8 +464,8 @@ pre {
 .icon-card__preview {
     display: grid;
     place-items: center;
-    width: 72px;
-    height: 72px;
+    width: 80px;
+    height: 80px;
     border-radius: 22px;
     background: radial-gradient(circle at top, rgba(203, 95, 46, 0.18), transparent 58%), #fff9f3;
     color: var(--accent-dark);

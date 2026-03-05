@@ -5,8 +5,8 @@
             fill="currentColor"
             d="M196 324C104.32 324 30 398.32 30 490V512C30 529.67 44.33 544 62 544H386C403.67 544 418 529.67 418 512V490C418 398.32 343.68 324 252 324H196Z"
         />
-        <rect x="396" y="136" width="44" height="176" rx="22" fill="currentColor" />
-        <rect x="330" y="202" width="176" height="44" rx="22" fill="currentColor" />
+        <rect x="394" y="128" width="52" height="192" rx="26" fill="currentColor" />
+        <rect x="324" y="198" width="192" height="52" rx="26" fill="currentColor" />
     </svg>
 </template>
 
