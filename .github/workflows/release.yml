@@ -1,16 +1,15 @@
 name: Release
 on:
     push:
-        branches:
-            - main
+        tags:
+            - 'v*'
     workflow_dispatch:
 
 jobs:
-    release:
+    publish:
         runs-on: ubuntu-latest
         permissions:
             contents: write
-            pull-requests: write
             id-token: write
         steps:
             - uses: actions/checkout@v4
@@ -22,11 +21,20 @@ jobs:
                   cache: npm
                   registry-url: 'https://registry.npmjs.org'
             - run: npm ci
-            - uses: changesets/action@v1
+            - run: npm run build
+            - run: npm run render
+            - run: npm audit signatures
+            - run: npm publish --access public --provenance
+            - name: Extract release notes
+              shell: bash
+              run: |
+                  VERSION="${GITHUB_REF_NAME#v}"
+                  awk -v ver="$VERSION" '
+                      $0 ~ "^##[[:space:]]+\\[?" ver "\\]?([[:space:]]|$)" {found=1; next}
+                      found && $0 ~ "^##[[:space:]]+" {exit}
+                      found {print}
+                  ' CHANGELOG.md > release.md
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
               with:
-                  version: npm run version-packages
-                  publish: npm run release
-                  createGithubReleases: true
-              env:
-                  NPM_CONFIG_PROVENANCE: true
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  body_path: release.md
