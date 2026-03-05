@@ -13,7 +13,7 @@
     "homepage": "https://vueiconify.com/",
     "repository": {
         "type": "git",
-        "url": "https://github.com/codemonster-ru/vueiconify.git"
+        "url": "git+https://github.com/codemonster-ru/vueiconify.git"
     },
     "bugs": {
         "url": "https://github.com/codemonster-ru/vueiconify/issues"
