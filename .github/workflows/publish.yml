@@ -20,11 +20,14 @@ jobs:
                   node-version: 20
                   cache: npm
                   registry-url: 'https://registry.npmjs.org'
+            - run: npm install -g npm@latest
+            - run: npm -v
             - run: npm ci
             - run: npm run build
             - run: npm run render
             - run: npm audit signatures
-            - run: npm publish --access public --provenance
+            - run: npm config delete //registry.npmjs.org/:_authToken || true
+            - run: npm publish --access public --provenance --loglevel verbose
             - name: Extract release notes
               shell: bash
               run: |
