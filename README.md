@@ -83,7 +83,7 @@ Supported icon names:
 
 <!-- generated-category-summary:start -->
 
-- **Movement**: 19 icons
+- **Movement**: 17 icons
 - **Editing And Commands**: 21 icons
 - **Interface Objects**: 42 icons
 - **Status And Messaging**: 19 icons
@@ -111,8 +111,6 @@ Movement:
 - `columns`
 - `expand`
 - `grid`
-- `panelLeft`
-- `panelRight`
 
 Editing And Commands:
 

@@ -239,16 +239,6 @@
         "keywords": ["grid"],
         "style": "solid"
     },
-    "panelLeft": {
-        "title": "Panel Left",
-        "keywords": ["panel", "left"],
-        "style": "solid"
-    },
-    "panelRight": {
-        "title": "Panel Right",
-        "keywords": ["panel", "right"],
-        "style": "solid"
-    },
     "logIn": {
         "title": "Log In",
         "keywords": ["log", "in"],

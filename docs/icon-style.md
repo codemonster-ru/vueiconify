@@ -1,9 +1,8 @@
 # Icon Style Guide
 
-This library uses an original product-UI icon language with one active shipping style and one limited secondary style:
+This library uses an original product-UI icon language with one active shipping style:
 
 - `solid`: dense, compact silhouettes for primary UI actions
-- `regular`: limited experimental outline variants kept only for a small existing subset
 
 The target is deliberately close to established icon-pack discipline, but not to exact external contours or silhouettes.
 
@@ -23,16 +22,13 @@ The target is deliberately close to established icon-pack discipline, but not to
 - Handles, stems, and bars should feel related in weight
 - Avoid tiny decorative cuts that disappear at small sizes
 - `Solid` should read as one dominant silhouette first, internal detail second
-- `Regular` should read as one calm outline family when used, not as a thin copy of the solid path
 
 ## Consistency Targets
 
 - `Solid` bars and dividers: roughly `52-60` units thick
-- `Regular` strokes: roughly `24-32` units thick, with rounded caps and joins by default
 - Circular utility forms: outer radius large, inner cut generous
 - Chevron/check terminals: wide and readable rather than sharp
 - Motion icons like refresh should favor one clear sweep and one clear arrowhead
-- `Regular` icons should not become hairline, technical, or overly geometric
 
 ## Originality Constraints
 
@@ -47,24 +43,10 @@ The target is deliberately close to established icon-pack discipline, but not to
 Use this library direction when redrawing the core pack:
 
 - `Solid` should feel dense, compact, and product-ready
-- `Regular` should feel calm, even, and readable at small sizes
 - Outer silhouette should dominate over decorative internals
 - Counters and gaps should be short and controlled, not airy or spiky
 - Avoid illustrative detail, asymmetrical noise, and accidental “sticker” shapes
 - If an icon starts to resemble a traced FA shape too closely, step back and rebuild the proportion system
-
-## Limited Regular Set
-
-These are the current icons that still carry a `regular` variant:
-
-- `xmark`
-- `calendar`
-- `bell`
-- `mail`
-- `message`
-- `user`
-- `lock`
-- `gear`
 
 ## Build Workflow
 
@@ -82,4 +64,3 @@ These are the current icons that still carry a `regular` variant:
 - For directional icons, confirm arrowhead or caret direction reads instantly
 - For circular icons, verify the ring thickness matches the rest of the family
 - Avoid accidental visual references to well-known third-party icon shapes
-- When touching an existing `regular` icon, compare `solid` and `regular` side-by-side and verify they feel like one family, not two unrelated icons
