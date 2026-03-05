@@ -1,8 +1,15 @@
 <template>
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='none' width='16' height='16'>
+    <svg v-bind="iconSvgAttrs" :width="size" :height="size">
+        <circle cx="256" cy="156" r="76" fill="currentColor" />
         <path
-            fill='currentColor'
-            d="m33,512h447c21.33,1,32-10.67,32-35,0-128-106.67-189-192-189h-128C106.67,288,0,352,0,480c-.11,21.99,11.33,32.21,33,32Z" />
-        <circle fill='currentColor' cx="256" cy="127" r="127" />
+            fill="currentColor"
+            d="M256 274c-94.6 0-172 68.8-172 153.1 0 22.6 18.3 40.9 40.9 40.9h262.2c22.6 0 40.9-18.3 40.9-40.9C428 342.8 350.6 274 256 274Z"
+        />
     </svg>
 </template>
+
+<script setup lang="ts">
+import { iconSizeDefaults, iconSvgAttrs, type IconSizeProps } from './_shared';
+
+withDefaults(defineProps<IconSizeProps>(), iconSizeDefaults);
+</script>

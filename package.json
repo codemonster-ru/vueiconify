@@ -1,6 +1,6 @@
 {
     "name": "@codemonster-ru/vueiconify",
-    "version": "0.7.0",
+    "version": "1.0.0",
     "description": "Open source vue icon library.",
     "keywords": [],
     "homepage": "https://vueiconify.com/",
@@ -30,16 +30,32 @@
     ],
     "scripts": {
         "dev": "vite dev --force --mode development",
-        "build": "vite build --mode production"
+        "create-icon": "node ./scripts/create-icon.mjs",
+        "generate": "node ./scripts/generate-icons.mjs",
+        "validate-icons": "node ./scripts/generate-icons.mjs --validate-only",
+        "changeset": "changeset",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
+        "lint": "eslint . --ext .ts,.vue,.mts",
+        "build": "npm run generate && vite build --mode production",
+        "build:showcase": "vite build --config vite.showcase.config.mts",
+        "typecheck": "vue-tsc --noEmit",
+        "render": "node ./test/render-consumer.mjs",
+        "smoke": "npm run build && tsc -p tsconfig.smoke.json",
+        "version-packages": "changeset version",
+        "release": "npm run build && npm run render && npm audit signatures && changeset publish"
     },
     "peerDependencies": {
-        "vue": "^3.0.0"
+        "vue": "^3.5.0"
     },
     "devDependencies": {
+        "@changesets/changelog-github": "^0.5.2",
+        "@changesets/cli": "^2.29.7",
         "@types/node": "^20.14.10",
         "@typescript-eslint/eslint-plugin": "^7.16.0",
         "@vitejs/plugin-vue": "^5.0.5",
         "@vue/eslint-config-typescript": "^13.0.0",
+        "@vue/server-renderer": "^3.5.12",
         "eslint": "^8.57.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.1.3",

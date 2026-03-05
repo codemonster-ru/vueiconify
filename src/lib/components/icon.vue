@@ -1,41 +1,76 @@
 <template>
-    <component :is="loadIcon" :class="getClasses" />
+    <component :is="iconComponent" v-bind="iconBindings" :class="classes" />
 </template>
 
 <script setup lang="ts">
-import icons from '@/lib/icons.json';
-import { computed, defineAsyncComponent } from 'vue';
+import { computed, useAttrs, type Component } from 'vue';
+import { iconNames, type IconName } from '@/lib/iconMeta';
 
-const props = defineProps({
-    icon: {
-        type: String,
-        default: 'moon',
-        validator: (value: string) => icons.list.indexOf(value) > -1,
-    },
-    spin: {
-        type: Boolean,
-        default: false,
-    },
+defineOptions({
+    inheritAttrs: false,
 });
-const loadIcon = computed(() => {
-    const icon = props.icon;
 
-    return defineAsyncComponent(() => import('..' + `/components/${icon}.vue`));
-});
-const getClasses = computed(() => {
-    let classes = ['cm-icon'];
+const FALLBACK_ICON = 'moon' as const;
+type IconStyle = 'solid';
 
-    if (props.spin) {
-        classes.push('cm-icon_animations_spin');
+const iconModules = import.meta.glob('./*.vue', {
+    eager: true,
+    import: 'default',
+}) as Record<string, Component>;
+
+const props = withDefaults(
+    defineProps<{
+        icon?: IconName | string;
+        spin?: boolean;
+        size?: number | string;
+        style?: IconStyle;
+    }>(),
+    {
+        icon: FALLBACK_ICON,
+        spin: false,
+        size: 16,
+        style: 'solid',
+    },
+);
+const attrs = useAttrs();
+
+const toComponentIconName = (iconName: string) => {
+    if (!iconName.includes('-')) {
+        return iconName;
     }
 
-    return classes;
+    return iconName.toLowerCase().replace(/-([a-z0-9])/g, (_, char: string) => char.toUpperCase());
+};
+
+const getIconComponent = (iconName: string) => {
+    const componentIconName = toComponentIconName(iconName);
+    const normalizedIconName = iconNames.includes(componentIconName as IconName) ? componentIconName : FALLBACK_ICON;
+    const componentPath = `./${normalizedIconName}.vue`;
+
+    return iconModules[componentPath] ?? iconModules[`./${FALLBACK_ICON}.vue`];
+};
+
+const iconComponent = computed(() => {
+    return getIconComponent(props.icon);
+});
+
+const iconBindings = computed(() => {
+    return {
+        ...attrs,
+        size: props.size,
+    };
+});
+
+const classes = computed(() => {
+    return {
+        'vif-icon': true,
+        'vif-icon_animations_spin': props.spin,
+    };
 });
 </script>
-
 <style lang="scss" scoped>
-.cm-icon_animations_spin {
-    animation-name: cm-spin;
+.vif-icon_animations_spin {
+    animation-name: vif-spin;
     animation-delay: 0s;
     animation-duration: 2s;
     animation-direction: normal;
@@ -43,7 +78,7 @@ const getClasses = computed(() => {
     animation-timing-function: linear;
 }
 
-@keyframes cm-spin {
+@keyframes vif-spin {
     0% {
         transform: rotate(0deg);
     }

@@ -1,0 +1,15 @@
+<template>
+    <svg v-bind="iconSvgAttrs" :width="size" :height="size">
+        <path
+            fill="currentColor"
+            transform="scale(0.8)"
+            d="M96 160C96 124.7 124.7 96 160 96L480 96C515.3 96 544 124.7 544 160L544 480C544 515.3 515.3 544 480 544L160 544C124.7 544 96 515.3 96 480L96 160zM160 224L160 480L288 480L288 224L160 224zM480 224L352 224L352 480L480 480L480 224z"
+        />
+    </svg>
+</template>
+
+<script setup lang="ts">
+import { iconSizeDefaults, iconSvgAttrs, type IconSizeProps } from './_shared';
+
+withDefaults(defineProps<IconSizeProps>(), iconSizeDefaults);
+</script>

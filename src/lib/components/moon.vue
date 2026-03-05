@@ -1,8 +1,21 @@
 <template>
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='none' width='16' height='16'>
-        <path
-            fill='currentColor'
-            d='m352,448c-123.71,0-224-100.29-224-224,0-107.81,76.16-197.81,177.61-219.18-16.05-3.15-32.64-4.82-49.61-4.82C114.62,0,0,114.62,0,256s114.62,256,256,256c75.54,0,143.44-32.73,190.3-84.77-28.66,13.32-60.61,20.77-94.3,20.77Z'
-        />
+    <svg v-bind="iconSvgAttrs" :width="size" :height="size">
+        <defs>
+            <mask :id="maskId">
+                <rect width="512" height="512" fill="black" />
+                <circle cx="224" cy="256" r="174" fill="white" />
+                <circle cx="326" cy="220" r="146" fill="black" />
+            </mask>
+        </defs>
+        <rect width="512" height="512" fill="currentColor" :mask="`url(#${maskId})`" />
     </svg>
 </template>
+
+<script setup lang="ts">
+import { useId } from 'vue';
+import { iconSizeDefaults, iconSvgAttrs, type IconSizeProps } from './_shared';
+
+const maskId = useId();
+
+withDefaults(defineProps<IconSizeProps>(), iconSizeDefaults);
+</script>

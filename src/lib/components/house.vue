@@ -1,7 +1,15 @@
 <template>
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='none' width='16' height='16'>
+    <svg v-bind="iconSvgAttrs" :width="size" :height="size">
         <path
-            fill='currentColor'
-            d='m220.45,16.12c18.29-17.75,38.39-24.95,64,0l208.5,192.5c20.88,21.19,15,47-17,47l-31.5.5v224c.04,21.44-10.88,32.07-32.32,32.32h-63.85c-21.36-.51-31.86-11.38-32.07-32.07v-128.25c.21-21.63-10.58-32.08-31.88-31.88h-63.88c-21.48-.1-32.04,10.63-31.94,31.94v127.94c-.11,21.25-10.59,31.95-31.77,31.77h-64c-22.05.21-32.5-10.69-32.03-32.03v-223.74l-31.76-.5c-33,0-37-26.88-16-47L220.45,16.12Z' />
+            fill="currentColor"
+            d="M236 84.3a28 28 0 0 1 40 0l160 152c18 17.1 5.9 47.7-18.8 47.7H392V404c0 35.3-28.7 64-64 64H184c-35.3 0-64-28.7-64-64V284H94.8c-24.7 0-36.8-30.6-18.8-47.7l160-152Z"
+        />
+        <path fill="#f7f1e7" d="M256 250c30.9 0 56 25.1 56 56v86h-112v-86c0-30.9 25.1-56 56-56Z" />
     </svg>
 </template>
+
+<script setup lang="ts">
+import { iconSizeDefaults, iconSvgAttrs, type IconSizeProps } from './_shared';
+
+withDefaults(defineProps<IconSizeProps>(), iconSizeDefaults);
+</script>

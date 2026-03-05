@@ -1,19 +1,29 @@
 <template>
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='none' width='16' height='16'>
-        <circle fill='currentColor' cx='256' cy='256' r='128' />
-        <rect fill='currentColor' y='240.03' width='96' height='31.94' />
-        <rect fill='currentColor' x='416' y='240.03' width='96' height='31.94' />
-        <rect fill='currentColor' x='239.95' width='32.1' height='96' />
-        <polygon fill='currentColor' points='240 416 272 416 272 512 240.06 512 240 416' />
-        <rect
-fill='currentColor' x='93.09' y='60.96' width='31.94' height='96'
-              transform='translate(-45.1 109.03) rotate(-45)'
-        />
-        <rect
-fill='currentColor' x='355.02' y='92.75' width='96' height='32.1'
-              transform='translate(41.11 316.85) rotate(-45)'
-        />
-        <polygon fill='currentColor' points='357.08 380.39 379.71 357.76 447.59 425.65 425 448.23 357.08 380.39' />
-        <polygon fill='currentColor' points='131.75 357.04 154.37 379.67 86.49 447.55 63.9 424.96 131.75 357.04' />
+    <svg v-bind="iconSvgAttrs" :width="size" :height="size">
+        <defs>
+            <mask :id="maskId">
+                <rect width="512" height="512" fill="black" />
+                <path
+                    d="M256 34 318 128 410 106 388 198 474 256 388 314 410 406 318 384 256 478 194 384 102 406 124 314 38 256 124 198 102 106 194 128Z"
+                    fill="white"
+                    stroke="white"
+                    stroke-linejoin="round"
+                    stroke-width="52"
+                />
+                <circle cx="256" cy="256" r="108" fill="black" />
+                <circle cx="256" cy="256" r="74" fill="white" />
+            </mask>
+        </defs>
+
+        <rect width="512" height="512" fill="currentColor" :mask="`url(#${maskId})`" />
     </svg>
 </template>
+
+<script setup lang="ts">
+import { useId } from 'vue';
+import { iconSizeDefaults, iconSvgAttrs, type IconSizeProps } from './_shared';
+
+withDefaults(defineProps<IconSizeProps>(), iconSizeDefaults);
+
+const maskId = `sun-mask-${useId()}`;
+</script>
