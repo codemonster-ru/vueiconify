@@ -2,14 +2,31 @@
     <svg v-bind="iconSvgAttrs" :width="size" :height="size">
         <path
             fill="currentColor"
-            transform="scale(0.8)"
-            d="M64 128C51.1 128 39.4 135.8 34.4 147.8C29.4 159.8 32.2 173.5 41.4 182.6L224 365.3L224 480C224 488.5 227.4 496.6 233.4 502.6L297.4 566.6C299.9 569.1 302.7 571.1 305.7 572.6C284.5 541.7 272.1 504.3 272.1 464C272.1 364.6 347.6 282.9 444.4 273L534.8 182.6C544 173.4 546.7 159.7 541.7 147.7C536.7 135.7 524.9 128 512 128L64 128zM464 608C543.5 608 608 543.5 608 464C608 384.5 543.5 320 464 320C384.5 320 320 384.5 320 464C320 543.5 384.5 608 464 608zM523.3 427.3L486.6 464L523.3 500.7C529.5 506.9 529.5 517.1 523.3 523.3C517.1 529.5 506.9 529.5 500.7 523.3L464 486.6L427.3 523.3C421.1 529.5 410.9 529.5 404.7 523.3C398.5 517.1 398.5 506.9 404.7 500.7L441.4 464L404.7 427.3C398.5 421.1 398.5 410.9 404.7 404.7C410.9 398.5 421.1 398.5 427.3 404.7L464 441.4L500.7 404.7C506.9 398.5 517.1 398.5 523.3 404.7C529.5 410.9 529.5 421.1 523.3 427.3z"
+            d="M84 96h344c13.2 0 25.2 7.8 30.7 19.8 5.5 12 3.4 26.1-5.2 36l-137.5 158V454c0 10.1-4.9 19.6-13.2 25.6-8.3 6-19 7.8-28.9 4.8a32 32 0 0 1-11.6-6.4l-52-46.8a31.9 31.9 0 0 1-10.3-23.8V309.8L54.5 151.8c-8.6-9.9-10.7-24-5.2-36C54.8 103.8 66.8 96 80 96h4Z"
         />
+        <defs>
+            <mask :id="maskId">
+                <rect width="512" height="512" fill="black" />
+                <circle cx="418" cy="362" r="92" fill="white" />
+                <path
+                    d="M376 320 460 404M460 320 376 404"
+                    stroke="black"
+                    stroke-width="36"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    fill="none"
+                />
+            </mask>
+        </defs>
+        <rect width="512" height="512" fill="currentColor" :mask="`url(#${maskId})`" />
     </svg>
 </template>
 
 <script setup lang="ts">
+import { useId } from 'vue';
 import { iconSizeDefaults, iconSvgAttrs, type IconSizeProps } from './_shared';
 
 withDefaults(defineProps<IconSizeProps>(), iconSizeDefaults);
+
+const maskId = useId();
 </script>
