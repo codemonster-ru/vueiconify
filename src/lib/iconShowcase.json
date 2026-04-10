@@ -150,6 +150,11 @@
         "note": "Solid info icon being simplified toward a cleaner lowercase-i silhouette."
     },
     {
+        "icon": "infoCircle",
+        "status": "in_progress",
+        "note": "Solid info-circle icon matching the current filled status-circle construction."
+    },
+    {
         "icon": "warning",
         "status": "in_progress",
         "note": "Solid warning icon being simplified toward a cleaner alert triangle silhouette."
@@ -158,6 +163,11 @@
         "icon": "question",
         "status": "in_progress",
         "note": "Solid question icon being simplified toward a cleaner standalone question mark silhouette."
+    },
+    {
+        "icon": "questionCircle",
+        "status": "in_progress",
+        "note": "Solid question-circle icon matching the current filled status-circle construction."
     },
     {
         "icon": "checkCircle",

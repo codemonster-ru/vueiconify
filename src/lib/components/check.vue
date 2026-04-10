@@ -1,13 +1,15 @@
 <template>
     <svg v-bind="iconSvgAttrs" :width="size" :height="size">
-        <path
-            d="M128 274 220 364 392 148"
-            stroke="currentColor"
-            stroke-width="56"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            fill="none"
-        />
+        <g transform="translate(-12.8 -12.8) scale(1.05)">
+            <path
+                d="M128 274 220 364 392 148"
+                stroke="currentColor"
+                stroke-width="56"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                fill="none"
+            />
+        </g>
     </svg>
 </template>
 

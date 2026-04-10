@@ -144,6 +144,11 @@
         "keywords": ["info"],
         "style": "solid"
     },
+    "infoCircle": {
+        "title": "Info Circle",
+        "keywords": ["info", "circle"],
+        "style": "solid"
+    },
     "link": {
         "title": "Link",
         "keywords": ["link"],
@@ -182,6 +187,11 @@
     "question": {
         "title": "Question",
         "keywords": ["question"],
+        "style": "solid"
+    },
+    "questionCircle": {
+        "title": "Question Circle",
+        "keywords": ["question", "circle"],
         "style": "solid"
     },
     "rotateRight": {

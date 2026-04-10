@@ -1,54 +1,27 @@
 <template>
-    <main class="showcase">
-        <section class="hero">
-            <div class="hero__copy">
-                <p class="eyebrow">Vue icon library</p>
-                <h1>VueIconify</h1>
-                <p class="lead">
-                    Compact Vue 3 icon pack with a single `VueIconify` component and a single `size` prop across the
-                    whole API.
-                </p>
-
-                <div class="hero__actions">
-                    <button class="action-card" type="button" @click="copySnippet(installSnippet, 'install')">
-                        <span class="action-card__label">Install</span>
-                        <code>{{ installSnippet }}</code>
-                    </button>
-                    <button class="action-card" type="button" @click="copySnippet(importSnippet, 'import')">
-                        <span class="action-card__label">Import</span>
-                        <code>{{ importSnippet }}</code>
-                    </button>
-                </div>
+    <main class="showcase" :class="`showcase_${theme}`">
+        <header class="showcase__topbar">
+            <div class="showcase__brand">
+                <p class="eyebrow">Local preview</p>
+                <h1>VueIconify icons</h1>
+                <p class="showcase__hint">Быстрый просмотр набора. Клик по карточке копирует сниппет.</p>
             </div>
 
-            <div class="hero__preview">
-                <div class="hero__badge">v{{ version }}</div>
-                <div class="preview-orbit">
-                    <div class="preview-orbit__ring preview-orbit__ring_large"></div>
-                    <div class="preview-orbit__ring preview-orbit__ring_small"></div>
-                    <div class="preview-orbit__core">
-                        <VueIconify :icon="icons.circleNotch" :size="80" spin />
-                    </div>
-                    <div class="preview-orbit__node preview-orbit__node_top">
-                        <VueIconify :icon="icons.sun" :size="28" />
-                    </div>
-                    <div class="preview-orbit__node preview-orbit__node_right">
-                        <VueIconify :icon="icons.magnifyingGlass" :size="28" />
-                    </div>
-                    <div class="preview-orbit__node preview-orbit__node_bottom">
-                        <VueIconify :icon="icons.moon" :size="28" />
-                    </div>
-                    <div class="preview-orbit__node preview-orbit__node_left">
-                        <VueIconify :icon="icons.house" :size="28" />
-                    </div>
-                </div>
-            </div>
-        </section>
+            <button class="theme-toggle" type="button" @click="toggleTheme">
+                <span class="theme-toggle__icon">
+                    <VueIconify :icon="theme === 'dark' ? icons.sun : icons.moon" :size="18" :inset="demoIconInset" />
+                </span>
+                <span>{{ theme === 'dark' ? 'Light theme' : 'Dark theme' }}</span>
+            </button>
+        </header>
 
-        <section class="usage">
-            <article class="panel">
+        <section class="toolbar">
+            <article class="panel panel_compact">
                 <div class="panel__header">
-                    <h2>Generic Component</h2>
+                    <div>
+                        <p class="eyebrow">Usage</p>
+                        <h2>{{ sortedShowcaseIconEntries.length }} icons</h2>
+                    </div>
                     <button class="copy-button" type="button" @click="copySnippet(genericSnippet, 'generic')">
                         {{ copyLabel('generic') }}
                     </button>
@@ -58,19 +31,9 @@
         </section>
 
         <section class="catalog">
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">Active redesign</p>
-                    <h2>{{ showcaseIconEntries.length }} icons currently visible</h2>
-                </div>
-                <p class="section-heading__text">
-                    The full pack is hidden for now. Showcase highlights the currently visible icon set.
-                </p>
-            </div>
-
             <div class="catalog-groups">
                 <article
-                    v-for="entry in showcaseIconEntries"
+                    v-for="entry in sortedShowcaseIconEntries"
                     :key="entry.icon"
                     class="catalog-group catalog-group_tile"
                 >
@@ -84,7 +47,11 @@
                         @click="copySnippet(getIconSnippet(entry.icon), entry.icon)"
                     >
                         <span class="icon-card__preview">
-                            <VueIconify :icon="getIconToken(entry.icon)" :size="44" />
+                            <VueIconify
+                                :icon="getIconToken(entry.icon)"
+                                :size="44"
+                                :inset="getDemoIconInset(entry.icon)"
+                            />
                         </span>
                         <span class="icon-card__meta">{{ copyLabel(entry.icon) }}</span>
                     </button>
@@ -95,18 +62,60 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { VueIconify, icons } from '@/lib';
 import { showcaseIconEntries, type IconName } from '@/lib/iconMeta';
 
-type CopyKey = 'install' | 'import' | 'generic' | string;
+type CopyKey = 'generic' | string;
+type Theme = 'light' | 'dark';
 
-const version = __APP_VERSION__;
 const copiedKey = ref<CopyKey | null>(null);
+const theme = ref<Theme>('light');
 
-const installSnippet = 'npm install @codemonster-ru/vueiconify';
-const importSnippet = "import { VueIconify, icons } from '@codemonster-ru/vueiconify';";
 const genericSnippet = `<VueIconify :icon="icons.arrowLeft" :size="24" />`;
+const demoIconInset = 0.08;
+const themeStorageKey = 'vueiconify-showcase-theme';
+const withInset = (iconNames: IconName[], inset: number) => {
+    return Object.fromEntries(iconNames.map(iconName => [iconName, inset])) as Partial<Record<IconName, number>>;
+};
+
+const demoIconInsetOverrides: Partial<Record<IconName, number>> = {
+    ...withInset(['arrowLeft', 'arrowRight', 'arrowUp', 'arrowDown', 'globe'], 0.01),
+    ...withInset(['ban'], 0.01),
+    ...withInset(['activity'], -0.02),
+
+    ...withInset(['check', 'plus', 'sparkles', 'xmark'], 0.02),
+    ...withInset(
+        [
+            'bars',
+            'caretDown',
+            'caretLeft',
+            'caretRight',
+            'caretUp',
+            'chevronDown',
+            'chevronLeft',
+            'chevronRight',
+            'chevronUp',
+            'minus',
+            'sort',
+        ],
+        0.03,
+    ),
+    ...withInset(['clock', 'externalLink', 'history', 'link', 'share', 'sliders', 'terminal'], 0.04),
+    ...withInset(['cloud', 'key', 'layers'], 0.05),
+    ...withInset(['hardDrive', 'star'], 0.06),
+    ...withInset(['bell', 'building', 'chartBar', 'cpu', 'database', 'wallet'], 0.07),
+    ...withInset(['bookmark', 'house'], 0.08),
+    ...withInset(['file', 'fileText', 'folder', 'inbox', 'warning'], 0.09),
+    ...withInset(['calendar', 'creditCard', 'folderOpen', 'user', 'userCheck', 'userMinus', 'userPlus', 'users'], 0.1),
+    ...withInset(['archive', 'briefcase', 'mail', 'message'], 0.11),
+    ...withInset(['checkCircle', 'infoCircle', 'questionCircle', 'xCircle'], 0.13),
+
+    ...withInset(['moon', 'sun'], 0.07),
+};
+const sortedShowcaseIconEntries = computed(() => {
+    return [...showcaseIconEntries].sort((left, right) => left.icon.localeCompare(right.icon));
+});
 
 const toKebabCase = (iconName: string) => {
     return iconName.replace(/[A-Z]/g, char => `-${char.toLowerCase()}`);
@@ -114,6 +123,10 @@ const toKebabCase = (iconName: string) => {
 
 const getIconToken = (iconName: IconName) => {
     return icons[iconName] ?? toKebabCase(iconName);
+};
+
+const getDemoIconInset = (iconName: IconName) => {
+    return demoIconInsetOverrides[iconName] ?? demoIconInset;
 };
 
 const getIconSnippet = (iconName: string) => {
@@ -138,6 +151,26 @@ const copySnippet = async (snippet: string, key: CopyKey) => {
         }
     }, 1200);
 };
+
+const applyTheme = (value: Theme) => {
+    document.documentElement.dataset.theme = value;
+};
+
+const toggleTheme = () => {
+    theme.value = theme.value === 'light' ? 'dark' : 'light';
+};
+
+onMounted(() => {
+    const storedTheme = window.localStorage.getItem(themeStorageKey);
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    theme.value = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : preferredTheme;
+    applyTheme(theme.value);
+});
+
+watch(theme, value => {
+    applyTheme(value);
+    window.localStorage.setItem(themeStorageKey, value);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -147,6 +180,15 @@ const copySnippet = async (snippet: string, key: CopyKey) => {
         linear-gradient(180deg, #f7f1e7 0%, #f1ede3 100%);
     color: #1f2328;
     font-family: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+    transition:
+        background 220ms ease,
+        color 220ms ease;
+}
+
+:global(:root[data-theme='dark'] body) {
+    background: radial-gradient(circle at top, rgba(108, 137, 255, 0.18), transparent 28%),
+        linear-gradient(180deg, #121726 0%, #0b101b 100%);
+    color: #edf2ff;
 }
 
 :global(*) {
@@ -166,61 +208,103 @@ const copySnippet = async (snippet: string, key: CopyKey) => {
     --accent: #cb5f2e;
     --accent-dark: #8b3b1c;
     --muted: #655b4f;
+    --code-surface: #231b18;
+    --code-text: #fdf6ee;
+    --tile-surface: rgba(255, 249, 240, 0.72);
+    --shadow: 0 12px 32px rgba(89, 58, 32, 0.08);
+    --soft-shadow: 0 14px 30px rgba(89, 58, 32, 0.07);
 
-    width: min(1200px, calc(100% - 32px));
+    width: min(1280px, calc(100% - 32px));
     margin: 0 auto;
-    padding: 40px 0 64px;
+    padding: 24px 0 40px;
 }
 
-.hero,
-.usage,
-.catalog {
-    margin-bottom: 28px;
+.showcase_dark {
+    --surface: rgba(17, 24, 39, 0.78);
+    --surface-strong: rgba(14, 21, 35, 0.96);
+    --border: rgba(168, 183, 255, 0.18);
+    --accent: #ff9b62;
+    --accent-dark: #ffd2a4;
+    --muted: #b9c1d9;
+    --code-surface: #09101d;
+    --code-text: #edf2ff;
+    --tile-surface: rgba(17, 24, 39, 0.68);
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
+    --soft-shadow: 0 16px 34px rgba(0, 0, 0, 0.2);
 }
 
-.hero {
+.showcase__topbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.showcase__brand {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-    gap: 24px;
-    align-items: stretch;
+    gap: 8px;
 }
 
-.hero__copy,
-.hero__preview,
+.showcase__hint {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: inherit;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-1px);
+    border-color: rgba(203, 95, 46, 0.34);
+}
+
+.theme-toggle__icon {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--surface-strong);
+    color: var(--accent);
+}
+
+.toolbar,
+.catalog {
+    margin-bottom: 20px;
+}
+
 .panel,
 .icon-card {
     border: 1px solid var(--border);
-    border-radius: 28px;
+    border-radius: 24px;
     background: var(--surface);
     backdrop-filter: blur(12px);
-    box-shadow: 0 16px 40px rgba(89, 58, 32, 0.08);
+    box-shadow: var(--shadow);
 }
 
-.hero__copy {
-    padding: 32px;
+.panel {
+    padding: 18px 20px;
 }
 
-.hero__preview {
-    position: relative;
-    display: grid;
-    place-items: center;
-    min-height: 320px;
-    overflow: hidden;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.6), transparent 44%),
-        linear-gradient(145deg, rgba(229, 213, 188, 0.58), rgba(248, 244, 237, 0.9));
-}
-
-.hero__badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    padding: 8px 12px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.74);
-    color: var(--accent-dark);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
+.panel_compact {
+    max-width: 420px;
 }
 
 .eyebrow {
@@ -236,42 +320,22 @@ h1,
 h2,
 h3 {
     margin: 0;
-    font-family: Georgia, 'Times New Roman', serif;
-    line-height: 0.95;
+    font-family: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+    line-height: 1.05;
 }
 
 h1 {
-    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
 }
 
 h2 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
 }
 
 h3 {
-    font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+    font-size: 1rem;
 }
 
-.lead,
-.section-heading__text {
-    color: var(--muted);
-    line-height: 1.6;
-}
-
-.lead {
-    max-width: 42rem;
-    margin: 18px 0 0;
-    font-size: 1.08rem;
-}
-
-.hero__actions {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-    margin-top: 28px;
-}
-
-.action-card,
 .copy-button,
 .icon-card {
     transition:
@@ -281,32 +345,11 @@ h3 {
         box-shadow 180ms ease;
 }
 
-.action-card {
-    display: grid;
-    gap: 10px;
-    padding: 16px 18px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    background: var(--surface-strong);
-    color: inherit;
-    text-align: left;
-    cursor: pointer;
-}
-
-.action-card:hover,
 .copy-button:hover,
 .icon-card:hover {
     transform: translateY(-2px);
     border-color: rgba(203, 95, 46, 0.34);
     box-shadow: 0 12px 24px rgba(111, 61, 26, 0.12);
-}
-
-.action-card__label {
-    color: var(--accent-dark);
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
 }
 
 code,
@@ -318,80 +361,8 @@ code {
     font-size: 0.92rem;
 }
 
-.preview-orbit {
-    position: relative;
-    width: min(320px, 80%);
-    aspect-ratio: 1;
-}
-
-.preview-orbit__ring,
-.preview-orbit__core,
-.preview-orbit__node {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-}
-
-.preview-orbit__ring {
-    border: 1px dashed rgba(139, 59, 28, 0.16);
-}
-
-.preview-orbit__ring_small {
-    inset: 18%;
-}
-
-.preview-orbit__core,
-.preview-orbit__node {
-    display: grid;
-    place-items: center;
-    background: rgba(255, 252, 247, 0.9);
-}
-
-.preview-orbit__core {
-    inset: 34%;
-    color: var(--accent);
-    animation: pulse 5s ease-in-out infinite;
-}
-
-.preview-orbit__node {
-    width: 64px;
-    height: 64px;
-    inset: auto;
-    color: var(--accent-dark);
-}
-
-.preview-orbit__node_top {
-    top: 6%;
-    left: calc(50% - 32px);
-}
-
-.preview-orbit__node_right {
-    top: calc(50% - 32px);
-    right: 6%;
-}
-
-.preview-orbit__node_bottom {
-    bottom: 6%;
-    left: calc(50% - 32px);
-}
-
-.preview-orbit__node_left {
-    top: calc(50% - 32px);
-    left: 6%;
-}
-
-.usage {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
-.panel {
-    padding: 24px;
-}
-
 .panel__header,
-.section-heading {
+.catalog-group__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -399,10 +370,10 @@ code {
 }
 
 .copy-button {
-    padding: 10px 14px;
+    padding: 9px 14px;
     border: 1px solid var(--border);
     border-radius: 999px;
-    background: #fff8f1;
+    background: var(--surface-strong);
     color: var(--accent-dark);
     font-size: 13px;
     font-weight: 700;
@@ -411,50 +382,43 @@ code {
 
 pre {
     overflow: auto;
-    margin: 18px 0 0;
-    padding: 18px;
-    border-radius: 20px;
-    background: #231b18;
-    color: #fdf6ee;
+    margin: 14px 0 0;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: var(--code-surface);
+    color: var(--code-text);
     line-height: 1.6;
-}
-
-.catalog {
-    padding: 6px 0;
 }
 
 .catalog-groups {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 14px;
 }
 
 .catalog-group {
-    padding: 22px;
+    padding: 14px;
     border: 1px solid var(--border);
-    border-radius: 28px;
-    background: rgba(255, 249, 240, 0.72);
-    box-shadow: 0 14px 30px rgba(89, 58, 32, 0.07);
+    border-radius: 22px;
+    background: var(--tile-surface);
+    box-shadow: var(--soft-shadow);
 }
 
 .catalog-group_tile {
     display: grid;
     grid-template-rows: auto 1fr;
-    gap: 14px;
+    gap: 12px;
 }
 
 .catalog-group__header {
-    display: grid;
-    gap: 8px;
-    margin-bottom: 0;
+    margin-bottom: 2px;
 }
 
 .icon-card {
     display: grid;
-    gap: 12px;
+    gap: 10px;
     justify-items: center;
-    padding: 18px 14px;
+    padding: 16px 12px;
     color: inherit;
     cursor: pointer;
 }
@@ -462,16 +426,10 @@ pre {
 .icon-card__preview {
     display: grid;
     place-items: center;
-    width: 80px;
-    height: 80px;
-    border-radius: 22px;
-    background: radial-gradient(circle at top, rgba(203, 95, 46, 0.18), transparent 58%), #fff9f3;
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
     color: var(--accent-dark);
-}
-
-.icon-card__name {
-    font-size: 0.95rem;
-    font-weight: 700;
 }
 
 .icon-card__meta {
@@ -479,27 +437,10 @@ pre {
     font-size: 0.82rem;
 }
 
-@keyframes pulse {
-    0%,
-    100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.06);
-    }
-}
-
 @media (max-width: 900px) {
-    .hero,
-    .usage {
-        grid-template-columns: 1fr;
-    }
-
-    .hero__actions {
-        grid-template-columns: 1fr;
-    }
-
-    .section-heading {
+    .showcase__topbar,
+    .panel__header,
+    .catalog-group__header {
         flex-direction: column;
         align-items: flex-start;
     }
@@ -508,30 +449,17 @@ pre {
 @media (max-width: 640px) {
     .showcase {
         width: min(100% - 20px, 1200px);
-        padding-top: 20px;
+        padding-top: 18px;
     }
 
-    .hero__copy,
-    .hero__preview,
     .panel,
     .catalog-group {
-        padding: 20px;
-        border-radius: 22px;
+        padding: 16px;
     }
 
-    .preview-orbit__node {
-        width: 56px;
-        height: 56px;
-    }
-
-    .preview-orbit__node_top,
-    .preview-orbit__node_bottom {
-        left: calc(50% - 28px);
-    }
-
-    .preview-orbit__node_left,
-    .preview-orbit__node_right {
-        top: calc(50% - 28px);
+    .theme-toggle {
+        width: 100%;
+        justify-content: center;
     }
 }
 </style>

@@ -90,7 +90,7 @@ Supported icon names:
 - **Movement**: 17 icons
 - **Editing And Commands**: 21 icons
 - **Interface Objects**: 42 icons
-- **Status And Messaging**: 19 icons
+- **Status And Messaging**: 21 icons
 
 <!-- generated-category-summary:end -->
 
@@ -198,8 +198,10 @@ Status And Messaging:
 - `eyeSlash`
 - `history`
 - `info`
+- `infoCircle`
 - `moon`
 - `question`
+- `questionCircle`
 - `rotateRight`
 - `shield`
 - `sparkles`

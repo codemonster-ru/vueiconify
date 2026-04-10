@@ -1,9 +1,12 @@
 <template>
-    <component :is="iconComponent" v-bind="iconBindings" :class="classes" />
+    <span :class="wrapperClasses" :style="wrapperStyles">
+        <component :is="iconComponent" v-bind="iconBindings" :class="classes" />
+    </span>
 </template>
 
 <script setup lang="ts">
 import { computed, useAttrs, type Component } from 'vue';
+import iconOpticalOffsetsJson from '@/lib/iconOpticalOffsets.json';
 import { iconNames, type IconName } from '@/lib/iconMeta';
 
 defineOptions({
@@ -18,18 +21,22 @@ const iconModules = import.meta.glob('./*.vue', {
     import: 'default',
 }) as Record<string, Component>;
 
+const iconOpticalOffsets = iconOpticalOffsetsJson as Partial<Record<IconName, { x: number; y: number }>>;
+
 const props = withDefaults(
     defineProps<{
         icon?: IconName | string;
         spin?: boolean;
         size?: number | string;
         style?: IconStyle;
+        inset?: number;
     }>(),
     {
         icon: FALLBACK_ICON,
         spin: false,
         size: 16,
         style: 'solid',
+        inset: 0,
     },
 );
 const attrs = useAttrs();
@@ -50,8 +57,13 @@ const getIconComponent = (iconName: string) => {
     return iconModules[componentPath] ?? iconModules[`./${FALLBACK_ICON}.vue`];
 };
 
+const normalizedIconName = computed<IconName>(() => {
+    const componentIconName = toComponentIconName(props.icon);
+    return iconNames.includes(componentIconName as IconName) ? (componentIconName as IconName) : FALLBACK_ICON;
+});
+
 const iconComponent = computed(() => {
-    return getIconComponent(props.icon);
+    return getIconComponent(normalizedIconName.value);
 });
 
 const iconBindings = computed(() => {
@@ -64,12 +76,42 @@ const iconBindings = computed(() => {
 const classes = computed(() => {
     return {
         'vif-icon': true,
-        'vif-icon_animations_spin': props.spin,
+    };
+});
+
+const wrapperClasses = computed(() => {
+    return {
+        'vif-icon-wrapper': true,
+        'vif-icon-wrapper_animations_spin': props.spin,
+    };
+});
+
+const wrapperStyles = computed(() => {
+    const safeInset = Math.min(Math.max(props.inset, -0.25), 0.49);
+    const scale = 1 - safeInset * 2;
+    const offset = iconOpticalOffsets[normalizedIconName.value] ?? { x: 0, y: 0 };
+
+    return {
+        '--vif-icon-scale': String(scale),
+        '--vif-icon-offset-x': String(offset.x),
+        '--vif-icon-offset-y': String(offset.y),
     };
 });
 </script>
 <style lang="scss" scoped>
-.vif-icon_animations_spin {
+.vif-icon-wrapper {
+    display: inline-grid;
+    place-items: center;
+    line-height: 0;
+}
+
+.vif-icon {
+    transform: translate(calc(var(--vif-icon-offset-x, 0) * 100%), calc(var(--vif-icon-offset-y, 0) * 100%))
+        scale(var(--vif-icon-scale, 1));
+    transform-origin: center;
+}
+
+.vif-icon-wrapper_animations_spin {
     animation-name: vif-spin;
     animation-delay: 0s;
     animation-duration: 2s;
