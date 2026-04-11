@@ -8,6 +8,12 @@ The authoritative release notes are published on GitHub Releases for each versio
 
 - No changes yet.
 
+## 1.1.1
+
+### Patch Changes
+
+- Refine the `sun` icon to better match the intended rounded ray silhouette and align its visual weight with the rest of the set.
+
 ## 1.1.0
 
 ### Minor Changes
