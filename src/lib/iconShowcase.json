@@ -5,6 +5,11 @@
         "note": "Rounded stroke-based left arrow aligned to the current reference direction."
     },
     {
+        "icon": "arrowTurnUpLeft",
+        "status": "in_progress",
+        "note": "Rounded turn-up-left arrow matching the curved return-style silhouette."
+    },
+    {
         "icon": "arrowRight",
         "status": "in_progress",
         "note": "Mirrored rounded stroke arrow paired with the current left arrow."

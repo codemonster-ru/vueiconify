@@ -8,6 +8,13 @@ The authoritative release notes are published on GitHub Releases for each versio
 
 - No changes yet.
 
+## 1.2.0
+
+### Minor Changes
+
+- Add the new `arrowTurnUpLeft` icon and include it in showcase previews.
+- Refine showcase optical inset tuning so directional arrows render with more consistent visual weight.
+
 ## 1.1.1
 
 ### Patch Changes

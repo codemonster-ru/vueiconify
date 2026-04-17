@@ -87,7 +87,7 @@ Supported icon names:
 
 <!-- generated-category-summary:start -->
 
-- **Movement**: 17 icons
+- **Movement**: 18 icons
 - **Editing And Commands**: 21 icons
 - **Interface Objects**: 42 icons
 - **Status And Messaging**: 21 icons
@@ -101,6 +101,7 @@ Movement:
 - `arrowDown`
 - `arrowLeft`
 - `arrowRight`
+- `arrowTurnUpLeft`
 - `arrowUp`
 - `bars`
 - `caretDown`
