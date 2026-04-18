@@ -528,5 +528,40 @@
         "icon": "xCircle",
         "status": "in_progress",
         "note": "Solid x-circle icon being simplified toward a cleaner error-in-circle silhouette."
+    },
+    {
+        "icon": "github",
+        "status": "approved",
+        "note": "Official GitHub mark included as a brand icon with source and trademark guidelines metadata."
+    },
+    {
+        "icon": "telegram",
+        "status": "approved",
+        "note": "Official Telegram mark included as a brand icon with source and trademark metadata."
+    },
+    {
+        "icon": "vk",
+        "status": "approved",
+        "note": "Official VK mark included as a brand icon with source and trademark guidelines metadata."
+    },
+    {
+        "icon": "youtube",
+        "status": "approved",
+        "note": "Official YouTube mark included as a brand icon with source and trademark guidelines metadata."
+    },
+    {
+        "icon": "x",
+        "status": "approved",
+        "note": "Official X mark included as a brand icon with source and trademark guidelines metadata."
+    },
+    {
+        "icon": "facebook",
+        "status": "approved",
+        "note": "Official Facebook mark included as a brand icon with source and trademark guidelines metadata."
+    },
+    {
+        "icon": "instagram",
+        "status": "approved",
+        "note": "Official Instagram mark included as a brand icon with source and trademark guidelines metadata."
     }
 ]

@@ -44,6 +44,7 @@
         "externalLink",
         "eye",
         "eyeSlash",
+        "facebook",
         "file",
         "fileText",
         "filter",
@@ -51,6 +52,7 @@
         "folderOpen",
         "funnelX",
         "gear",
+        "github",
         "globe",
         "grid",
         "hardDrive",
@@ -60,6 +62,7 @@
         "inbox",
         "info",
         "infoCircle",
+        "instagram",
         "key",
         "layers",
         "link",
@@ -89,6 +92,7 @@
         "sparkles",
         "star",
         "sun",
+        "telegram",
         "terminal",
         "trash",
         "unlock",
@@ -98,9 +102,12 @@
         "userMinus",
         "userPlus",
         "users",
+        "vk",
         "wallet",
         "warning",
+        "x",
         "xCircle",
-        "xmark"
+        "xmark",
+        "youtube"
     ]
 }

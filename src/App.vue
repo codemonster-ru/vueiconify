@@ -31,32 +31,71 @@
         </section>
 
         <section class="catalog">
-            <div class="catalog-groups">
-                <article
-                    v-for="entry in sortedShowcaseIconEntries"
-                    :key="entry.icon"
-                    class="catalog-group catalog-group_tile"
-                >
-                    <div class="catalog-group__header">
-                        <h3>{{ getDisplayIconName(entry.icon) }}</h3>
-                    </div>
-
-                    <button
-                        class="icon-card"
-                        type="button"
-                        @click="copySnippet(getIconSnippet(entry.icon), entry.icon)"
+            <article class="catalog-section">
+                <header class="catalog-section__header">
+                    <p class="eyebrow">Core Icons</p>
+                    <h2>{{ nonBrandShowcaseIconEntries.length }} icons</h2>
+                </header>
+                <div class="catalog-groups">
+                    <article
+                        v-for="entry in nonBrandShowcaseIconEntries"
+                        :key="entry.icon"
+                        class="catalog-group catalog-group_tile"
                     >
-                        <span class="icon-card__preview">
-                            <VueIconify
-                                :icon="getIconToken(entry.icon)"
-                                :size="44"
-                                :inset="getDemoIconInset(entry.icon)"
-                            />
-                        </span>
-                        <span class="icon-card__meta">{{ copyLabel(entry.icon) }}</span>
-                    </button>
-                </article>
-            </div>
+                        <div class="catalog-group__header">
+                            <h3>{{ getDisplayIconName(entry.icon) }}</h3>
+                        </div>
+
+                        <button
+                            class="icon-card"
+                            type="button"
+                            @click="copySnippet(getIconSnippet(entry.icon), entry.icon)"
+                        >
+                            <span class="icon-card__preview">
+                                <VueIconify
+                                    :icon="getIconToken(entry.icon)"
+                                    :size="44"
+                                    :inset="getDemoIconInset(entry.icon)"
+                                />
+                            </span>
+                            <span class="icon-card__meta">{{ copyLabel(entry.icon) }}</span>
+                        </button>
+                    </article>
+                </div>
+            </article>
+
+            <article v-if="brandShowcaseIconEntries.length > 0" class="catalog-section">
+                <header class="catalog-section__header">
+                    <p class="eyebrow">Brand Icons</p>
+                    <h2>{{ brandShowcaseIconEntries.length }} icons</h2>
+                </header>
+                <div class="catalog-groups">
+                    <article
+                        v-for="entry in brandShowcaseIconEntries"
+                        :key="entry.icon"
+                        class="catalog-group catalog-group_tile"
+                    >
+                        <div class="catalog-group__header">
+                            <h3>{{ getDisplayIconName(entry.icon) }}</h3>
+                        </div>
+
+                        <button
+                            class="icon-card"
+                            type="button"
+                            @click="copySnippet(getIconSnippet(entry.icon), entry.icon)"
+                        >
+                            <span class="icon-card__preview">
+                                <VueIconify
+                                    :icon="getIconToken(entry.icon)"
+                                    :size="44"
+                                    :inset="getDemoIconInset(entry.icon)"
+                                />
+                            </span>
+                            <span class="icon-card__meta">{{ copyLabel(entry.icon) }}</span>
+                        </button>
+                    </article>
+                </div>
+            </article>
         </section>
     </main>
 </template>
@@ -64,7 +103,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue';
 import { VueIconify, icons } from '@/lib';
-import { showcaseIconEntries, type IconName } from '@/lib/iconMeta';
+import { iconCatalog, showcaseIconEntries, type IconName } from '@/lib/iconMeta';
 
 type CopyKey = 'generic' | string;
 type Theme = 'light' | 'dark';
@@ -115,6 +154,14 @@ const demoIconInsetOverrides: Partial<Record<IconName, number>> = {
 };
 const sortedShowcaseIconEntries = computed(() => {
     return [...showcaseIconEntries].sort((left, right) => left.icon.localeCompare(right.icon));
+});
+
+const nonBrandShowcaseIconEntries = computed(() => {
+    return sortedShowcaseIconEntries.value.filter(entry => !iconCatalog[entry.icon]?.brand);
+});
+
+const brandShowcaseIconEntries = computed(() => {
+    return sortedShowcaseIconEntries.value.filter(entry => Boolean(iconCatalog[entry.icon]?.brand));
 });
 
 const toKebabCase = (iconName: string) => {
@@ -288,6 +335,27 @@ watch(theme, value => {
 .toolbar,
 .catalog {
     margin-bottom: 20px;
+}
+
+.catalog {
+    display: grid;
+    gap: 20px;
+}
+
+.catalog-section {
+    display: grid;
+    gap: 12px;
+}
+
+.catalog-section__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.catalog-section__header .eyebrow {
+    margin-bottom: 0;
 }
 
 .panel,

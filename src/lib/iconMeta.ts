@@ -22,6 +22,12 @@ export type IconCatalogEntry = {
     title: string;
     keywords: string[];
     style: 'solid';
+    brand?: {
+        source: string;
+        guidelines?: string;
+        license?: string;
+        isTrademark?: boolean;
+    };
 };
 
 export type IconShowcaseEntry = {

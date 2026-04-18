@@ -89,7 +89,7 @@ Supported icon names:
 
 - **Movement**: 18 icons
 - **Editing And Commands**: 21 icons
-- **Interface Objects**: 42 icons
+- **Interface Objects**: 49 icons
 - **Status And Messaging**: 21 icons
 
 <!-- generated-category-summary:end -->
@@ -155,16 +155,19 @@ Interface Objects:
 - `cpu`
 - `creditCard`
 - `database`
+- `facebook`
 - `file`
 - `fileText`
 - `folder`
 - `folderOpen`
 - `gear`
+- `github`
 - `globe`
 - `hardDrive`
 - `heart`
 - `house`
 - `inbox`
+- `instagram`
 - `key`
 - `layers`
 - `lock`
@@ -175,7 +178,9 @@ Interface Objects:
 - `plug`
 - `receipt`
 - `server`
+- `share`
 - `star`
+- `telegram`
 - `terminal`
 - `unlock`
 - `user`
@@ -183,8 +188,10 @@ Interface Objects:
 - `userMinus`
 - `userPlus`
 - `users`
-- `share`
+- `vk`
 - `wallet`
+- `x`
+- `youtube`
 
 Status And Messaging:
 
@@ -227,8 +234,17 @@ Primary exports:
 
 - Icons follow a custom UI-solid style built for compact product interfaces.
 - Shapes use soft geometry, large negative space, and readable silhouettes at `16px` and `20px`.
-- The set avoids tracing or reproducing third-party icon paths and keeps its own proportions and corner treatment.
+- Most icons avoid tracing or reproducing third-party icon paths and keep their own proportions and corner treatment.
+- Brand icons are the explicit exception and should be sourced from official assets/guidelines.
 - New icons should be checked for optical balance, consistent thickness, and clear meaning before merge.
+
+## Brand Icons And Trademarks
+
+- Brand icons and names are trademarks of their respective owners.
+- Use brand icons only to reference the corresponding brand/product/service and never to imply endorsement.
+- Brand-specific usage rules vary and can change over time. Check each brand's official guidelines before shipping.
+- If a rights holder requests updates or removal, keepers of this package should prioritize prompt compliance.
+- `github` icon source and guidelines: [GitHub Logos and Usage](https://github.com/logos).
 
 ## Core Set
 

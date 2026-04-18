@@ -508,5 +508,81 @@
         "title": "Arrow Turn Up Left",
         "keywords": ["arrow", "turn", "up", "left", "return", "back"],
         "style": "solid"
+    },
+    "github": {
+        "title": "GitHub",
+        "keywords": ["github", "brand", "logo", "social", "octocat"],
+        "style": "solid",
+        "brand": {
+            "source": "https://github.com/logos",
+            "guidelines": "https://github.com/logos",
+            "license": "Trademark (GitHub, Inc.)",
+            "isTrademark": true
+        }
+    },
+    "telegram": {
+        "title": "Telegram",
+        "keywords": ["telegram", "brand", "logo", "social", "messenger"],
+        "style": "solid",
+        "brand": {
+            "source": "https://telegram.org/tour/screenshots",
+            "license": "Trademark (Telegram FZ-LLC / Telegram Messenger LLP)",
+            "isTrademark": true
+        }
+    },
+    "vk": {
+        "title": "VK",
+        "keywords": ["vk", "vkontakte", "brand", "logo", "social"],
+        "style": "solid",
+        "brand": {
+            "source": "https://vk.com/brand",
+            "guidelines": "https://vk.com/brand",
+            "license": "Trademark (VK Company Limited)",
+            "isTrademark": true
+        }
+    },
+    "x": {
+        "title": "X",
+        "keywords": ["x", "twitter", "brand", "logo", "social"],
+        "style": "solid",
+        "brand": {
+            "source": "https://x.com",
+            "guidelines": "https://about.x.com/en/who-we-are/brand-toolkit",
+            "license": "Trademark (X Corp.)",
+            "isTrademark": true
+        }
+    },
+    "youtube": {
+        "title": "YouTube",
+        "keywords": ["youtube", "brand", "logo", "video", "social"],
+        "style": "solid",
+        "brand": {
+            "source": "https://www.youtube.com/howyoutubeworks/resources/brand-resources/#logos-icons-and-colors",
+            "guidelines": "https://www.youtube.com/howyoutubeworks/resources/brand-resources/#logos-icons-and-colors",
+            "license": "Trademark (Google LLC / YouTube)",
+            "isTrademark": true
+        }
+    },
+    "facebook": {
+        "title": "Facebook",
+        "keywords": ["facebook", "brand", "logo", "social", "meta"],
+        "style": "solid",
+        "brand": {
+            "source": "https://about.meta.com/brand/resources/facebook/logo",
+            "guidelines": "https://about.meta.com/brand/resources/facebook/logo",
+            "license": "Trademark (Meta Platforms, Inc.)",
+            "isTrademark": true
+        }
+    },
+    "instagram": {
+        "title": "Instagram",
+        "keywords": ["instagram", "brand", "logo", "social", "meta"],
+        "style": "solid",
+        "brand": {
+            "source": "https://about.meta.com/brand/resources/instagram",
+            "guidelines": "https://about.meta.com/brand/resources/instagram",
+            "license": "Trademark (Meta Platforms, Inc.)",
+            "isTrademark": true
+        }
     }
 }

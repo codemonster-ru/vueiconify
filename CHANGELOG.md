@@ -1,12 +1,15 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+## 1.3.0
 
-The authoritative release notes are published on GitHub Releases for each version tag.
+### Minor Changes
 
-## Unreleased
+- Add a new brand-icon layer and release readiness improvements.
 
-- No changes yet.
+    - Add brand icons: `github`, `telegram`, `vk`, `youtube`, `x`, `facebook`, and `instagram`.
+    - Extend icon catalog metadata with optional `brand` information (`source`, `guidelines`, `license`, `isTrademark`).
+    - Separate the local showcase into dedicated `Core Icons` and `Brand Icons` sections.
+    - Update README with brand/trademark usage guidance.
 
 ## 1.2.0
 
