@@ -87,7 +87,7 @@ Supported icon names:
 
 <!-- generated-category-summary:start -->
 
-- **Movement**: 18 icons
+- **Movement**: 25 icons
 - **Editing And Commands**: 21 icons
 - **Interface Objects**: 49 icons
 - **Status And Messaging**: 21 icons
@@ -99,10 +99,17 @@ Supported icon names:
 Movement:
 
 - `arrowDown`
+- `arrowDownLong`
 - `arrowLeft`
+- `arrowLeftLong`
 - `arrowRight`
+- `arrowRightLong`
+- `arrowTurnLeftDown`
+- `arrowTurnRightUp`
 - `arrowTurnUpLeft`
+- `arrowTurnUpRight`
 - `arrowUp`
+- `arrowUpLong`
 - `bars`
 - `caretDown`
 - `caretLeft`
@@ -279,9 +286,9 @@ npm run render
 
 ## Releases
 
-- Create a changeset with `npm run changeset` for every user-facing change.
-- Merge changesets into `main` and let the release workflow open or update the version PR.
-- When the version PR is merged, Changesets publishes to npm and creates the GitHub Release automatically.
+- Bump version manually in `package.json` and `package-lock.json`.
+- Add release notes manually to `CHANGELOG.md`.
+- Run `npm run release` to build, verify, and publish to npm.
 
 ## Showcase
 

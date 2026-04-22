@@ -119,7 +119,24 @@ const withInset = (iconNames: IconName[], inset: number) => {
 };
 
 const demoIconInsetOverrides: Partial<Record<IconName, number>> = {
-    ...withInset(['arrowLeft', 'arrowRight', 'arrowUp', 'arrowDown', 'arrowTurnUpLeft', 'globe'], 0.01),
+    ...withInset(
+        [
+            'arrowLeft',
+            'arrowLeftLong',
+            'arrowRight',
+            'arrowRightLong',
+            'arrowUp',
+            'arrowUpLong',
+            'arrowDown',
+            'arrowDownLong',
+            'arrowTurnUpLeft',
+            'arrowTurnUpRight',
+            'arrowTurnRightUp',
+            'arrowTurnLeftDown',
+            'globe',
+        ],
+        0.01,
+    ),
     ...withInset(['ban'], 0.01),
     ...withInset(['activity'], -0.02),
 

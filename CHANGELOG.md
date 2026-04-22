@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.1
+
+### Patch Changes
+
+- Add long-direction arrow variants for all cardinal directions.
+- Add `arrowLeftLong`, `arrowUpLong`, and `arrowDownLong`.
+- Refine `arrowRightLong` tail length to the maximum without clipping while keeping the arrowhead unchanged.
+
 ## 1.3.0
 
 ### Minor Changes

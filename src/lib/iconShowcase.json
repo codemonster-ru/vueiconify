@@ -5,14 +5,44 @@
         "note": "Rounded stroke-based left arrow aligned to the current reference direction."
     },
     {
+        "icon": "arrowLeftLong",
+        "status": "in_progress",
+        "note": "Extended left arrow using the same head size with a longer horizontal tail."
+    },
+    {
         "icon": "arrowTurnUpLeft",
         "status": "in_progress",
         "note": "Rounded turn-up-left arrow matching the curved return-style silhouette."
     },
     {
+        "icon": "arrowTurnUpRight",
+        "status": "in_progress",
+        "note": "Rounded turn-up-right arrow mirrored from the same curved return-style silhouette."
+    },
+    {
+        "icon": "arrowTurnRightUp",
+        "status": "in_progress",
+        "note": "Rounded turn-right-up arrow rotated to keep the same return-style stroke behavior."
+    },
+    {
+        "icon": "arrowTurnLeftDown",
+        "status": "in_progress",
+        "note": "Rounded turn-left-down arrow rotated to complete the directional return-style set."
+    },
+    {
         "icon": "arrowRight",
         "status": "in_progress",
         "note": "Mirrored rounded stroke arrow paired with the current left arrow."
+    },
+    {
+        "icon": "arrowRightLong",
+        "status": "in_progress",
+        "note": "Extended right arrow using the same head size with a longer horizontal tail."
+    },
+    {
+        "icon": "arrowUpLong",
+        "status": "in_progress",
+        "note": "Extended up arrow using the same head size with a longer vertical tail."
     },
     {
         "icon": "arrowUp",
@@ -23,6 +53,11 @@
         "icon": "arrowDown",
         "status": "approved",
         "note": "Vertical down arrow matching the same rounded stroke construction."
+    },
+    {
+        "icon": "arrowDownLong",
+        "status": "in_progress",
+        "note": "Extended down arrow using the same head size with a longer vertical tail."
     },
     {
         "icon": "check",
